@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Todo } from './model';
 import { AiFillDelete, AiFillEdit } from 'react-icons/ai';
 import { MdDone } from 'react-icons/md';
-import TodoList from './TodoList';
 
 type Props = {
     todo: Todo;
@@ -28,13 +27,17 @@ const SingleTodo:React.FC<Props> = ({ todo, todos, settodos}) => {
     }
      
 
-    const handleEdit = (e:React.FormEvent, id:Number) => {
+    const handleEdit = (e:React.FormEvent, id:number) => {
         e.preventDefault();
         
         settodos(
             todos.map((todo) => todo.id === id ? { ...todo, todo: editTodo } : todo)
         );
-        setEdit(false);
+        if(editTodo !== ""){
+            setEdit(false);
+        }
+        
+        
     }
 
     useEffect(() => {
