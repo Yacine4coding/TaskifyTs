@@ -19,7 +19,7 @@ const SingleTodo:React.FC<Props> = ({ todo, todos, settodos}) => {
 
 
     const handleDone = (id:number) => {
-        settodos(todos.map(todo => todo.id === id?{...todo, isDone: !todo.isDone} : todo))
+        settodos(todos.map(todo => todo.id === id?{...todo, isDone: !todo.isDone} : todo));
     }
 
     const handleDelete = (id:number) => {
@@ -36,48 +36,49 @@ const SingleTodo:React.FC<Props> = ({ todo, todos, settodos}) => {
         if(editTodo !== ""){
             setEdit(false);
         }
-        
-        
     }
 
     useEffect(() => {
       inputRef.current?.focus();
     }, [edit])
-    
-
 
   return (
-    <form className="todos__single" onSubmit={(e) => handleEdit(e,todo.id)}>
-        {
-            edit ? (
-                <input 
-                ref={inputRef}
-                value={editTodo}
-                onChange={(e) => seteditTodo(e.target.value)} className='todos__single--text' />
-            ) : todo.isDone ? (
-                    <s className="todos__single--text">{todo.todo}</s>
-            ):(
-                    <span className="todos__single--text">{todo.todo}</span>
-            )
-        }
-        
-        <div>
-            <span className="icon" onClick={() => {
-                if(!edit && !todo.isDone){
-                    setEdit(!edit);
-                }
-            }}>
-                <AiFillEdit />
-            </span>
-            <span className="icon" onClick={() => handleDelete(todo.id)}>
-                <AiFillDelete />
-            </span>
-            <span className="icon" onClick={() => handleDone(todo.id)}>
-                <MdDone />
-            </span>
-        </div>
-    </form>
-  )
+            <form className="todos__single"  onSubmit={(e) => handleEdit(e,todo.id)}>
+                    {
+                        edit ? (
+                            <input 
+                            ref={inputRef}
+                            value={editTodo}
+                            onChange={(e) => seteditTodo(e.target.value)} className='todos__single--text' />
+                        ) : todo.isDone ? (
+                                <s className="todos__single--text">{todo.todo}</s>
+                        ):(
+                                <span className="todos__single--text">{todo.todo}</span>
+                        )
+                    }
+                    
+                    <div>
+                        <span className="icon" onClick={() => {
+                            if(!edit && !todo.isDone){
+                                setEdit(!edit);
+                            }
+                        }}>
+                            <AiFillEdit />
+                        </span>
+                        <span className="icon" onClick={() => handleDelete(todo.id)}>
+                            <AiFillDelete />
+                        </span>
+                        <span className="icon" onClick={() => handleDone(todo.id)}>
+                            <MdDone />
+                        </span>
+                    </div>
+                </form>
+            
+  
+
+  );
+
+
 }
 
 export default SingleTodo
